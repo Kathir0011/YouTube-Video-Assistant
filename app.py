@@ -71,7 +71,7 @@ def get_response(api_key, video_url, request):
 
 # creating title, description for the web app
 title = "YouTube Video Assistant 🧑‍💻"
-description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)"
+description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\n[Click here to download a Demo video](https://huggingface.co/spaces/Kathir0011/YouTube_Video_Assistant/blob/main/Demo.mp4)"
 article = "Other Projects:\n"\
           "💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
           "📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)\n"\
@@ -82,7 +82,7 @@ youtube_video_assistant = gr.Interface(
     inputs=[gr.Text(label="Enter the OpenAI API Key:", placeholder=f"Example: sk-{'*' * 45}AgM"), 
             gr.Text(label="Enter the Youtube Video URL:", placeholder="Example: https://www.youtube.com/watch?v=MnDudvCyWpc"),
             gr.Text(label="Enter your Question", placeholder="Example: What's the video is about?")],
-    outputs=gr.TextArea(label="Answers using gpt-3.5-turbo:"),
+    outputs=gr.TextArea(label="Powered by gpt-3.5-turbo:"),
     title=title,
     description=description,
     article=article
