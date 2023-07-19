@@ -71,7 +71,7 @@ def get_response(api_key, video_url, request):
 
 # creating title, description for the web app
 title = "YouTube Video Assistant 🧑‍💻"
-description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\n[Click here to download a Demo video](https://huggingface.co/spaces/Kathir0011/YouTube_Video_Assistant/blob/main/Demo.mp4)"
+description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\n"
 article = "Other Projects:\n"\
           "💰 [US Health Insurance Cost Prediction](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
           "📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)\n"\
