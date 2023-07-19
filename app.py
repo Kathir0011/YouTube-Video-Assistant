@@ -73,7 +73,7 @@ def get_response(api_key, video_url, request):
 title = "YouTube Video Assistant 🧑‍💻"
 description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\n[Click here to download a Demo video](https://huggingface.co/spaces/Kathir0011/YouTube_Video_Assistant/blob/main/Demo.mp4)"
 article = "Other Projects:\n"\
-          "💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
+          "💰 [US Health Insurance Cost Prediction](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
           "📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)\n"\
           "🪶 [Birds Classifier](https://huggingface.co/spaces/Kathir0011/Birds_Classification)"
 # building the app
