@@ -1,6 +1,5 @@
-gradio==3.28.1
-langchain==0.0.157
-openai==0.27.6
+gradio==4.8.0
+langchain
 faiss-cpu==1.7.4
+langchain-google-genai
 youtube_transcript_api
-tiktoken

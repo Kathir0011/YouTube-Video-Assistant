@@ -1,10 +1,10 @@
 import gradio as gr
+import os
 
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain.document_loaders import YoutubeLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
-from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 from langchain.prompts.chat import (
     ChatPromptTemplate,
@@ -14,9 +14,9 @@ from langchain.prompts.chat import (
 
 def create_db_from_video_url(video_url, api_key):
     """
-    Creates an Embedding of the Video and makes it suitable for similarity searching.
+    Creates an Embedding of the Video and performs 
     """
-    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
 
     loader = YoutubeLoader.from_youtube_url(video_url)
     transcripts = loader.load()
@@ -26,20 +26,18 @@ def create_db_from_video_url(video_url, api_key):
     docs = text_splitter.split_documents(transcripts)
 
     db = FAISS.from_documents(docs, embedding=embeddings)
-
     return db
 
-def get_response(api_key, video_url, request):
+def get_response(video, request):
     """
-    Usind gpt-3.5-turbo to obtain the response. It can handle upto 4096 tokens.
+    Usind Gemini Pro to get the response. It can handle upto 32k.
     """
-
-    db = create_db_from_video_url(video_url, api_key)
-
-    docs = db.similarity_search(query=request, k=4)
+    API_KEY = os.environ.get('API_Key')
+    db = create_db_from_video_url(video, API_KEY)
+    docs = db.similarity_search(query=request, k=5)
     docs_content = " ".join([doc.page_content for doc in docs])
 
-    chat = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2, openai_api_key=api_key)
+    chat = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=API_KEY, convert_system_message_to_human=True)
 
     # creating a template for request
     template = """
@@ -71,18 +69,16 @@ def get_response(api_key, video_url, request):
 
 # creating title, description for the web app
 title = "YouTube Video Assistant 🧑‍💻"
-description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\nClick Here to view the [Demo Video](https://cdn-uploads.huggingface.co/production/uploads/641aa7814577db917f70f8aa/Zh_tpIiB4DSUZf-LD1uxv.mp4)."
+description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)"
 article = "Other Projects:\n"\
-          "💰 [US Health Insurance Cost Prediction](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
-          "📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)\n"\
-          "🪶 [Birds Classifier](https://huggingface.co/spaces/Kathir0011/Birds_Classification)"
+"💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
+"📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)"
 # building the app
 youtube_video_assistant = gr.Interface(
     fn=get_response,
-    inputs=[gr.Text(label="Enter the OpenAI API Key:", placeholder=f"Example: sk-{'*' * 45}AgM"), 
-            gr.Text(label="Enter the Youtube Video URL:", placeholder="Example: https://www.youtube.com/watch?v=MnDudvCyWpc"),
+    inputs=[gr.Text(label="Enter the Youtube Video URL:", placeholder="Example: https://www.youtube.com/watch?v=MnDudvCyWpc"),
             gr.Text(label="Enter your Question", placeholder="Example: What's the video is about?")],
-    outputs=gr.TextArea(label="Powered by gpt-3.5-turbo:"),
+    outputs=gr.TextArea(label="Answers using Gemini Pro:"),
     title=title,
     description=description,
     article=article
