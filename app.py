@@ -72,7 +72,8 @@ title = "YouTube Video Assistant 🧑‍💻"
 description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)"
 article = "Other Projects:\n"\
 "💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
-"📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)"
+"📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)\n"\
+"🪶 [Birds Classifier](https://huggingface.co/spaces/Kathir0011/Birds_Classification)"
 # building the app
 youtube_video_assistant = gr.Interface(
     fn=get_response,
