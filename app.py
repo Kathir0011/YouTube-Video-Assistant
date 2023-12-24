@@ -30,9 +30,9 @@ def create_db_from_video_url(video_url, api_key):
 
 def get_response(video, request):
     """
-    Usind Gemini Pro to get the response. It can handle upto 32k.
+    Usind Gemini Pro to get the response. It can handle upto 32k tokens.
     """
-    API_KEY = os.environ.get('API_Key')
+    API_KEY = os.environ.get("API_Key")
     db = create_db_from_video_url(video, API_KEY)
     docs = db.similarity_search(query=request, k=5)
     docs_content = " ".join([doc.page_content for doc in docs])
@@ -69,11 +69,12 @@ def get_response(video, request):
 
 # creating title, description for the web app
 title = "YouTube Video Assistant 🧑‍💻"
-description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)"
-article = "Other Projects:\n"\
-"💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)\n"\
-"📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)\n"\
+description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\nClick here to view [demo](https://cdn-uploads.huggingface.co/production/uploads/641aa7814577db917f70f8aa/vSEGALDIYsqdRM7t_49rp.mp4)."
+article = "Other Projects:<br/>"\
+"💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)<br/>"\
+"📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)<br/>"\
 "🪶 [Birds Classifier](https://huggingface.co/spaces/Kathir0011/Birds_Classification)"
+
 # building the app
 youtube_video_assistant = gr.Interface(
     fn=get_response,

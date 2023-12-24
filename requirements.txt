@@ -1,5 +1,5 @@
-gradio==4.8.0
+gradio
 langchain
-faiss-cpu==1.7.4
+faiss-cpu
 langchain-google-genai
-youtube_transcript_api
+youtube-transcript-api
