@@ -69,7 +69,8 @@ def get_response(video, request):
 
 # creating title, description for the web app
 title = "YouTube Video Assistant 🧑‍💻"
-description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only)\nClick here to view [demo](https://cdn-uploads.huggingface.co/production/uploads/641aa7814577db917f70f8aa/vSEGALDIYsqdRM7t_49rp.mp4)."
+description = "Answers to the Questions asked by the user on the specified YouTube video. (English Only).\n\n"\
+"Click here to view [demo](https://cdn-uploads.huggingface.co/production/uploads/641aa7814577db917f70f8aa/A-AN-Nkt4qGUKvPhJ92dJ.mp4)."
 article = "Other Projects:<br/>"\
 "💰 [Health Insurance Predictor](http://health-insurance-cost-predictor-k19.streamlit.app/)<br/>"\
 "📰 [Fake News Detector](https://fake-news-detector-k19.streamlit.app/)<br/>"\
